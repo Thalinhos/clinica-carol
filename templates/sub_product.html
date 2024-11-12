@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Produto</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin-top: -100px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/afterLogin">Menu</a>
+        <a class="navbar-brand">Olá, {{ session["username"] }}</a>
+
+        <form class="form-inline">
+            <a class="navbar-brand" href="/logoff">Sair</a>
+        </form>
+    </nav>
+
+    <div class="container">
+        <h2 class="mb-4">{{ name }}</h2>
+        <p>Valor atual: <strong>{{ amount }}</strong></p>
+        <form action="/sub_product_sub" method="post" class="w-50">
+            <div class="form-group">
+             
+                <input type="hidden" name="name" value="{{ name }}">
+                <input type="number" class="form-control" name="amount" placeholder="Valor a ser retirado">
+                <br>
+                <input type="text" class="form-control" name="motivo" placeholder="Descrição/Motivo da retirada">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

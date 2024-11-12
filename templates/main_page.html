@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin-top: -100px;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; 
+        }
+        .button-container a {
+            text-decoration: none;
+            color: white;
+        }
+        .button-container .btn {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/afterLogin">Menu</a>
+        <a class="navbar-brand">Olá, {{ session["username"] }}</a>
+
+        <form class="form-inline">
+            <a class="navbar-brand" href="/logoff">Sair</a>
+        </form>
+    </nav>
+
+ 
+
+
+
+
+    <div class="container">
+        {% if msgSuccess %}
+        <script>
+            alert('{{ msgSuccess }}')
+        </script>
+    {% endif %}
+        <h1 class="mb-4">Menu Inicial</h1>
+        <div class="button-container">
+            <button class="btn btn-primary"><a href="{{ url_for('add_new_product') }}">Criar Novo Produto</a></button>
+            <button class="btn btn-danger"><a href="{{ url_for('sub_product_without_parameters') }}">Criar Nova Saída</a></button>
+            <button class="btn btn-primary"><a href="{{ url_for('show_all_products') }}">Todos os Produtos</a></button>
+            <button class="btn btn-success"><a href="{{ url_for('transaction_register_entry') }}">Histórico de Entrada</a></button>
+            <button class="btn btn-danger"><a href="{{ url_for('transaction_register_extract') }}">Histórico de saída</a></button>
+            <button class="btn btn-warning"><a href="{{ url_for('logoff') }}">Fazer Logoff</a></button>
+
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

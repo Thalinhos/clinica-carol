@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@2.0.1"></script>
+
+</head>
+<body >
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/afterLogin">Menu</a>
+        <a class="navbar-brand">Olá, {{ session["username"] }}</a>
+
+        <form class="form-inline">
+            <a class="navbar-brand" href="/logoff">Sair</a>
+        </form>
+    </nav>
+    <div class="container mt-5">
+    {% if msgSuccess %}
+        <script>
+            alert('{{ msgSuccess }}')
+        </script>
+    {% endif %}
+    <h1 class="mb-4">Produtos</h1>
+        <input type="search" name="search" placeholder="Pesquisar..."
+        hx-post="/sqlSearchLeft" 
+        hx-trigger="input changed delay:500ms, search" 
+        hx-target="#search-results">
+    <br>
+    <br>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th>Data de Entrada</th>
+                    <th>Responsável</th>
+                    <th>Descrição</th>
+                    
+                </tr>
+            </thead>
+            <tbody id="search-results">
+                {% for product in produtos_ordenados %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.leftDate }}</td>
+                    <td>{{ product.employeeLeft }}</td>
+                    <td>{{ product.motivo }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/di

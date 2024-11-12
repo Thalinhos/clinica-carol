@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .action-buttons form {
+            margin-bottom: 0; 
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px; 
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/afterLogin">Menu</a>
+        <a class="navbar-brand">Olá, {{ session["username"] }}</a>
+
+        <form class="form-inline">
+            <a class="navbar-brand" href="/logoff">Sair</a>
+        </form>
+    </nav>
+    <div class="container mt-5">
+    <h1 class="mb-4">Produtos</h1>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th style="width: 200px;">Ações</th> 
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in allProducts %}
+                <tr>
+                    <td>{{ product[1] }}</td>
+                    <td>{{ product[2] }}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <form method="post" action="/add_product">
+                                <input type="hidden" name="name" value="{{ product[1] }}">
+                                <input type="hidden" name="amount" value="{{ product[2] }}">
+                                <button type="submit" class="btn btn-success btn-sm">Adicionar</button>
+                            </form>
+                            <form method="post" action="/sub_product">
+                                <input type="hidden" name="name" value="{{ product[1] }}">
+                                <input type="hidden" name="amount" value="{{ product[2] }}">
+                                <button type="submit" class="btn btn-danger btn-sm">Retirar</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/di
+

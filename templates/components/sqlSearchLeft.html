@@ -1,0 +1,9 @@
+{% for product in produtos_ordenados %}
+<tr>
+    <td>{{ product.name }}</td>
+    <td>{{ product.quantity }}</td>
+    <td>{{ product.leftDate }}</td>
+    <td>{{ product.employeeLeft }}</td>
+    <td>{{ product.motivo }}</td>
+</tr>
+{% endfor %}

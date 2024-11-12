@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retirar Produto</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin-top: -100px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/afterLogin">Menu</a>
+        <a class="navbar-brand">Olá, {{ session["username"] }}</a>
+
+        <form class="form-inline">
+            <a class="navbar-brand" href="/logoff">Sair</a>
+        </form>
+    </nav>
+
+    <div class="container">
+        <h2 class="mb-4">Faça uma retirada</h2>
+        <form action="/sub_product_without_parameters" method="POST" class="w-50">
+            <div class="form-group">
+                <select class="form-control" name="name" id="selectProduto" required>
+                    <option value="">Selecione um produto</option>
+                    {% for produto in produtos %}
+                    <option value="{{produto[1]}}">{{produto[1]}} ({{produto[2]}} unidades)</option>
+                    {% endfor %}
+                </select>                
+                <br>
+                <input type="number" class="form-control" name="amount" placeholder="Valor a ser retirado">
+                <br>    
+                <input type="text" class="form-control" name="motivo" placeholder="Preencha uma descrição">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert alert-dismissible fade show" role="alert">
+                    {% for category, message in messages %}
+                    <div class="d-flex justify-content-center">
+                        <div class="ml-5 alert alert-{{ 'danger' if category == 'error' else 'success' }} mt-2 w-100 text-center">
+                            {{ message }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
